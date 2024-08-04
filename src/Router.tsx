@@ -77,7 +77,7 @@ export function Router({
     if (!route) {
       setParams({});
     }
-  }, [pathname, routesToUse]);
+  }, [pathname]);
 
   const Page = routesToUse.find(({ path }) => {
     if (path === pathname) {
