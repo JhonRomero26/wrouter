@@ -1,0 +1,43 @@
+{
+  "name": "@jhonromero26/wrouter",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "author": "jhonromero26",
+  "scripts": {
+    "dev": "vite",
+    "build:app": "tsc -d && vite build",
+    "build": "swc ./src/*.tsx ./src/*.ts -d lib --strip-leading-paths",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "prepare": "npm run build && npm run build:types",
+    "build:types": "tsc --project ./tsconfig.build.json --outDir lib ",
+    "test": "vitest --run"
+  },
+  "dependencies": {
+    "path-to-regexp": "7.1.0"
+  },
+  "peerDependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "0.4.0",
+    "@swc/core": "1.7.6",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/react": "16.0.0",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@typescript-eslint/eslint-plugin": "8.0.0",
+    "@typescript-eslint/parser": "8.0.0",
+    "@vitejs/plugin-react-swc": "3.7.0",
+    "eslint": "9.8.0",
+    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-refresh": "0.4.9",
+    "happy-dom": "14.12.3",
+    "typescript": "5.5.4",
+    "vite": "5.3.5",
+    "vitest": "2.0.5"
+  }
+}

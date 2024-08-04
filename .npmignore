@@ -1,0 +1,14 @@
+public
+node_modules
+src
+
+.eslintrc.cjs
+.gitignore
+.swcrc
+index.html
+bun.lockb
+pnpm-lock.yaml
+tsconfig*.json
+tsconfig.node.json
+vite.config.ts
+vitest.config.js

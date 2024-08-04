@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "composite": false,
+    "tsBuildInfoFile": null
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "public",
+    "src/pages/",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/main.tsx",
+    "src/App.tsx"
+  ],
+}
