@@ -1,6 +1,6 @@
 {
   "name": "@jhonromero26/wrouter",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build:app": "tsc -d && vite build",
-    "build": "swc ./src/*.tsx ./src/*.ts -d lib --strip-leading-paths",
+    "build": "swc src -d lib --strip-leading-paths",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "npm run build && npm run build:types",

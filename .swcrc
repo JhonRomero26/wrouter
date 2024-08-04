@@ -2,17 +2,17 @@
   "$schema": "https://swc.rs/schema.json",
   "jsc": {
     "parser": {
-    "syntax": "typescript",
-    "tsx": true,
-    "dynamicImport": false,
-    "privateMethod": false,
-    "functionBind": false,
-    "exportDefaultFrom": false,
-    "exportNamespaceFrom": false,
-    "decorators": false,
-    "decoratorsBeforeExport": false,
-    "topLevelAwait": false,
-    "importMeta": false
+      "syntax": "typescript",
+      "tsx": true,
+      "dynamicImport": false,
+      "privateMethod": false,
+      "functionBind": false,
+      "exportDefaultFrom": false,
+      "exportNamespaceFrom": false,
+      "decorators": false,
+      "decoratorsBeforeExport": false,
+      "topLevelAwait": false,
+      "importMeta": false
     },
     "transform": {
       "react": {
@@ -29,9 +29,9 @@
     ".test.ts",
     ".test.tsx",
     ".d.ts",
-    "main.tsx",
-    "App.tsx"
+    "src/main.tsx",
+    "src/App.tsx",
+    "src/pages/"
   ],
   "minify": true
- }
- 
+}
