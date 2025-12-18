@@ -1,7 +1,7 @@
 import { match } from "path-to-regexp";
 import { Children, isValidElement, useEffect, useState } from "react";
 import { EVENTS } from "./consts";
-import { getCurrentPath } from "./utils";
+import { getCurrentPath, getSearhcParams } from "./utils";
 import { RouterContext } from "./RouterContext";
 
 type Route = {
@@ -21,6 +21,7 @@ export function Router({
   children,
 }: RouterProviderProps) {
   const [pathname, setPathname] = useState(getCurrentPath());
+  const [search, setSearch] = useState(getSearhcParams());
 
   const routesFromChildren =
     Children.map(children, (child) => {
@@ -41,6 +42,7 @@ export function Router({
   useEffect(() => {
     const onLocationChange = () => {
       setPathname(getCurrentPath());
+      setSearch(getSearhcParams());
     };
 
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange);
@@ -60,14 +62,15 @@ export function Router({
 
       const matchedURL = match(path, { decode: decodeURIComponent });
       const matched = matchedURL(pathname);
-      if (!matched) return false;
 
+      if (!matched) return false;
       routeParams = matched.params;
+
       return true;
     })?.Component || DefaultComponent;
 
   return (
-    <RouterContext.Provider value={{ pathname, params: routeParams }}>
+    <RouterContext.Provider value={{ pathname, params: routeParams, search }}>
       <Page />
     </RouterContext.Provider>
   );
