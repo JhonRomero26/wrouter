@@ -1,16 +1,12 @@
 import { match } from "path-to-regexp";
-import { Children, createContext, isValidElement, useEffect, useState } from "react";
+import { Children, isValidElement, useEffect, useState } from "react";
 import { EVENTS } from "./consts";
 import { getCurrentPath } from "./utils";
+import { RouterContext } from "./RouterContext";
 
 type Route = {
   path: string;
   Component: React.FC;
-};
-
-type RouterContextType = {
-  pathname: string;
-  params: Record<string, string>;
 };
 
 export type RouterProviderProps = {
@@ -19,29 +15,26 @@ export type RouterProviderProps = {
   children?: React.ReactNode;
 };
 
-export const RouterContext = createContext<RouterContextType>({} as RouterContextType);
-
 export function Router({
   routes = [],
   defaultComponent: DefaultComponent = () => <h1>404</h1>,
-  children
+  children,
 }: RouterProviderProps) {
   const [pathname, setPathname] = useState(getCurrentPath());
-  const [params, setParams] = useState({});
 
-  const routesFromChildren = Children.map(children, (child) => {
-    if (isValidElement(child)) {
-      const { type, props } = child;
-      let isRoute = false
+  const routesFromChildren =
+    Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        const { type, props } = child;
+        let isRoute = false;
 
-      if (typeof type === "function")
-        isRoute = type.name === "Route"
+        if (typeof type === "function") isRoute = type.name === "Route";
 
-      return isRoute ? props as Route : null;
-    }
+        return isRoute ? (props as Route) : null;
+      }
 
-    return null
-  }) || [];
+      return null;
+    }) || [];
 
   const routesToUse = routes.concat(routesFromChildren).filter(Boolean);
 
@@ -59,38 +52,22 @@ export function Router({
     };
   }, []);
 
-  useEffect(() => {
-    const route = routesToUse.find(({ path }) => {
-      if (path === pathname) {
-        setParams({});
-        return true;
-      }
+  let routeParams = {};
+
+  const Page =
+    routesToUse.find(({ path }) => {
+      if (path === pathname) return true;
 
       const matchedURL = match(path, { decode: decodeURIComponent });
       const matched = matchedURL(pathname);
       if (!matched) return false;
 
-      setParams(matched.params);
+      routeParams = matched.params;
       return true;
-    });
-
-    if (!route) {
-      setParams({});
-    }
-  }, [pathname]);
-
-  const Page = routesToUse.find(({ path }) => {
-    if (path === pathname) {
-      return true;
-    }
-
-    const matchedURL = match(path, { decode: decodeURIComponent });
-    const matched = matchedURL(pathname);
-    return !!matched;
-  })?.Component || DefaultComponent;
+    })?.Component || DefaultComponent;
 
   return (
-    <RouterContext.Provider value={{ pathname, params }}>
+    <RouterContext.Provider value={{ pathname, params: routeParams }}>
       <Page />
     </RouterContext.Provider>
   );

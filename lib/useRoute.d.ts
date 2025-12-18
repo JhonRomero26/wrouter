@@ -1,4 +1,1 @@
-export declare function useRoute(): {
-    pathname: string;
-    params: Record<string, string>;
-};
+export declare function useRoute(): import("./RouterContext").RouterContextType;

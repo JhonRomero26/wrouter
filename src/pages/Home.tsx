@@ -9,5 +9,5 @@ export default function HomePage() {
       <Link href="/search/java">Ir al Java!</Link>
       <Link href="/search/javascript">Ir al JavaScript!</Link>
     </main>
-  )
+  );
 }
